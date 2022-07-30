@@ -8,6 +8,7 @@ function getComputerChoice() {
     return objects[random];
 }
 
+
 function playRound(playerSelection, computerSelection) {
     // Converts playerSelection and computerSelection to lowercase
     playerSelection = playerSelection.toLowerCase();
@@ -38,6 +39,7 @@ function playRound(playerSelection, computerSelection) {
     }
   }
 
+
   function game() {
     for (let i = 0; i < 5; i++) {
         let playerChoice = prompt("Do you choose Rock, Paper, or Scissors?");
@@ -60,5 +62,6 @@ function playRound(playerSelection, computerSelection) {
     roundScore = 0;
     score = 0;
   }
+  
 
   game();
