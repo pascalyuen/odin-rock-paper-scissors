@@ -1,4 +1,4 @@
-let playerWinsRound = false;
+let roundScore = false;
 let score = 0;
 
 function getComputerChoice() {
@@ -15,24 +15,25 @@ function playRound(playerSelection, computerSelection) {
   
     // Logic for all possible outcomes of the game
     if (playerSelection === computerSelection) {
+        roundScore = 0; 
         return "Draw!"
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        playerWinsRound = true;
+        roundScore = 1;
         return "You win! Rock beats scissors!";
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        playerWinsRound = false;
+        roundScore = -1;
         return "You lose! Paper beats rock!";
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        playerWinsRound = true;
+        roundScore = 1;
         return "You win! Scissors beat paper!";
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        playerWinsRound = false;
+        roundScore = -1;
         return "You lose! Rock beats scissors!";
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        playerWinsRound = true;
+        roundScore = 1;
         return "You win! Paper beats rock!";
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        playerWinsRound = false;
+        roundScore = -1;
         return "You lose! Scissors beat paper!";
     }
   }
@@ -42,21 +43,21 @@ function playRound(playerSelection, computerSelection) {
         let playerChoice = prompt("Do you choose Rock, Paper, or Scissors?");
         console.log(playRound(playerChoice, getComputerChoice()));
 
-        // Add 1 score if the player wins the round
-        if (playerWinsRound) {
-            score += 1;
-        } 
+        // Keep score
+        score += roundScore;
     }
 
-    // If the player wins 3 or more rounds, he is the winner of the game
-    if (score >= 3) {
+    // Output the game result
+    if (score > 0) {
        console.log("You Win!");
-    } else {
+    } else if (score < 0) {
         console.log("You lose!");
+    } else {
+        console.log("It's a tie!")
     }
 
     // Reset the variables to prepare for new game
-    playerWinsRound = false;
+    roundScore = 0;
     score = 0;
   }
 
