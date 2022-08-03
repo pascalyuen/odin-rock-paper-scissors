@@ -1,5 +1,21 @@
-let roundScore = false;
-let score = 0;
+let playerScore = 0;
+let computerScore = 0;
+
+
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const gameResult = document.querySelector('.gameResult');
+const playerScoreArea = document.querySelector('.playerScoreArea');
+const computerScoreArea = document.querySelector('.computerScoreArea');
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => button.addEventListener('click', buttonClicked));
+
+function buttonClicked(e) {
+    playRound(e.target.id, getComputerChoice());
+}
+
 
 function getComputerChoice() {
     // Radomly returns Rock, Paper, or Scissors
@@ -16,52 +32,62 @@ function playRound(playerSelection, computerSelection) {
   
     // Logic for all possible outcomes of the game
     if (playerSelection === computerSelection) {
-        roundScore = 0; 
-        return "Draw!"
+        playerScoreArea.textContent = playerScore;
+        computerScoreArea.textContent = computerScore;
+        gameResult.textContent = 'Draw!';
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        roundScore = 1;
-        return "You win! Rock beats scissors!";
+        playerScore += 1;
+        playerScoreArea.textContent = playerScore;
+        computerScoreArea.textContent = computerScore;
+        gameResult.textContent = 'You win! Rock beats scissors!';
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        roundScore = -1;
-        return "You lose! Paper beats rock!";
+        computerScore += 1;
+        playerScoreArea.textContent = playerScore;
+        computerScoreArea.textContent = computerScore;
+        gameResult.textContent = 'You lose! Paper beats rock!';
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        roundScore = 1;
-        return "You win! Scissors beat paper!";
+        playerScore += 1;
+        playerScoreArea.textContent = playerScore;
+        computerScoreArea.textContent = computerScore;
+        playerScoreArea.textContent = playerScore;
+        gameResult.textContent = 'You win! Scissors beat paper!';
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        roundScore = -1;
-        return "You lose! Rock beats scissors!";
+        computerScore += 1;
+        playerScoreArea.textContent = playerScore;
+        computerScoreArea.textContent = computerScore;
+        gameResult.textContent = 'You lose! Rock beats scissors!';
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        roundScore = 1;
-        return "You win! Paper beats rock!";
+        playerScore += 1;
+        playerScoreArea.textContent = playerScore;
+        computerScoreArea.textContent = computerScore;
+        playerScoreArea.textContent = playerScore;
+        gameResult.textContent = 'You win! Paper beats rock!';
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        roundScore = -1;
-        return "You lose! Scissors beat paper!";
+        computerScore += 1;
+        playerScoreArea.textContent = playerScore;
+        computerScoreArea.textContent = computerScore;
+        gameResult.textContent = 'You lose! Scissors beat paper!';
     }
+
+    // Output the game result
+    if (playerScore === 5) {
+        gameResult.textContent = 'You Win!';
+
+        // Reset the variables to prepare for new game
+        playerScore = 0;
+        computerScore = 0;
+    } else if (computerScore === 5) {
+        gameResult.textContent = 'You Lose!';
+        
+        // Reset the variables to prepare for new game
+        playerScore = 0;
+        computerScore = 0;
+        } 
   }
 
 
   function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerChoice = prompt("Do you choose Rock, Paper, or Scissors?");
-        console.log(playRound(playerChoice, getComputerChoice()));
+    
+    
 
-        // Keep score
-        score += roundScore;
-    }
-
-    // Output the game result
-    if (score > 0) {
-       console.log("You Win!");
-    } else if (score < 0) {
-        console.log("You lose!");
-    } else {
-        console.log("It's a tie!")
-    }
-
-    // Reset the variables to prepare for new game
-    roundScore = 0;
-    score = 0;
   }
-  
-
-  game();
