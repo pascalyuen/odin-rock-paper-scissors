@@ -84,10 +84,3 @@ function playRound(playerSelection, computerSelection) {
         computerScore = 0;
         } 
   }
-
-
-  function game() {
-    
-    
-
-  }
